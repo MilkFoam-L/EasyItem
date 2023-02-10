@@ -1,19 +1,4 @@
-# Building
+# EasyItem
 
-* [Gradle](https://gradle.org/) - Dependency Management
-
-The GradleWrapper in included in this project.
-
-**Windows:**
-
-```
-gradlew.bat clean build
-```
-
-**macOS/Linux:**
-
-```
-./gradlew clean build
-```
-
-Build artifacts should be found in `./build/libs` folder.
+A bukkit item manage plugin.  
+Chinese Wiki: https://neige7.github.io/EasyItem-Wiki/
