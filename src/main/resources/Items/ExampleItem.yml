@@ -1,0 +1,224 @@
+ExampleItem:
+  # 物品材质
+  material: LEATHER_HELMET
+  # 物品CustomModelData(适用于1.14+)
+  custommodeldata: 1
+  # 物品损伤值
+  damage: 1
+  # 物品名
+  name: §6一件皮革甲
+  # 物品Lore
+  lore:
+  - '文本中小于号请添加反斜杠, 防止错误识别'
+  - '形如: \<\<\<\>\>\>'
+  - "换行符测试\n换行符测试"
+  # 物品附魔
+  enchantments:
+    ARROW_DAMAGE: 1
+    ARROW_KNOCKBACK: 1
+  # 物品隐藏标识
+  hideflags:
+  - HIDE_ATTRIBUTES
+  - HIDE_DESTROYS
+  # 物品颜色(适用于药水/皮革装备)
+  color: 65535
+  # 物品NBT
+  nbt:
+    # 可以在NBT中编辑物品的原版属性
+    AttributeModifiers:
+    - Amount: 10
+      AttributeName: minecraft:generic.max_health
+      Operation: 0
+      UUID:
+      - 0
+      - 31453
+      - 0
+      - 59664
+      Name: generic.maxHealth
+  # 物品私有节点
+  sections:
+    easyTest: 简单节点测试
+    calcTest:
+      type: fastcalc
+      formula: 1+2+3
+      min: 1
+      max: 100
+      fixed: 3
+
+GradientTest:
+  material: STONE
+  lore:
+    - <test1>
+    - <test2>
+  sections:
+    test1: <gradient::000000_FFFFFF_1_---------->
+    test2:
+      type: gradient
+      colorStart: 000000
+      colorEnd: FFFFFF
+      step: 1
+      text: ----------
+
+# 一个测试模板
+template1:
+  material: IRON_SWORD
+  lore:
+  - "&e攻击伤害: &f<damage>"
+  nbt:
+    MMOITEMS_ATTACK_DAMAGE: (Double) <damage>
+# 一个测试模板
+template2:
+  material: DIAMOND_SWORD
+
+# 一个全局继承测试, 它继承了"template1"的所有内容
+TemplateItem1:
+  inherit: template1
+  name: §f物品继承测试
+  sections:
+    damage: 100
+# 一个部分继承测试, 它继承了"template1"的lore, 以及"template2"的material
+TemplateItem2:
+  inherit: 
+    lore: template1
+    material: template2
+  name: §f物品继承测试
+  sections:
+    damage: 100
+# 一个顺序继承测试, 它将按顺序进行节点继承. 先继承"template1"的所有内容，再继承"template2"的所有内容
+TemplateItem3:
+  inherit:
+  - template1
+  - template2
+  name: §f物品继承测试
+  sections:
+    damage: 100
+
+# join节点测试
+JoinTest1:
+  material: STONE
+  lore:
+    # 结果: 1, 2, 3, 4, 5
+    - 'join节点: <test>'
+  sections:
+    test:
+      type: join
+      # 待操作的列表
+      list:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+JoinTest2:
+  material: STONE
+  lore:
+    # 结果: 1-2-3-4-5
+    - 'join节点: <test>'
+  sections:
+    test:
+      type: join
+      list:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      # 分隔符(默认为", )
+      separator: "-"
+JoinTest3:
+  material: STONE
+  lore:
+    # 结果: <1, 2, 3, 4, 5>
+    - 'join节点: <test>'
+  sections:
+    test:
+      type: join
+      list:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      # 前缀
+      prefix: "<"
+      # 后缀
+      postfix: ">"
+JoinTest4:
+  material: STONE
+  lore:
+    # 结果: 1, 2, 3
+    - 'join节点: <test>'
+  sections:
+    test:
+      type: join
+      list:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      # 限制长度
+      limit: 3
+JoinTest5:
+  material: STONE
+  lore:
+    # 结果: 1, 2, 3, ...
+    - 'join节点: <test>'
+  sections:
+    test:
+      type: join
+      list:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      limit: 3
+      # 超过长度的部分用该符号代替
+      truncated: "..."
+JoinTest6:
+  material: STONE
+  lore:
+    # 等同于:
+    # - 第一行
+    # - 第二行
+    # - 第三行
+    #
+    # 这个节点应该单独占据一行
+    # 不要在这行写其他文本(比如'join节点: <test>')
+    # 具体请自行测试
+    - '<test>'
+  sections:
+    test:
+      type: join
+      list:
+        - 第一行
+        - 第二行
+        - 第三行
+      # 像下面这样写分隔符、前缀和后缀
+      # 即可达到调用多行lore的效果
+      separator: "\\n"
+      prefix: '"'
+      postfix: '"'
+
+RepeatTest1:
+  material: STONE
+  lore:
+    # 等同于:
+    # - 文本
+    # - 文本
+    # - 文本
+    # 这个节点应该单独占据一行
+    # 不要在这行写其他文本(比如'repeat节点: <test>')
+    # 具体请自行测试
+    - '<test>'
+  sections:
+    test:
+      type: repeat
+      content: 文本
+      repeat: 3
+      # 像下面这样写分隔符、前缀和后缀
+      # 即可达到调用多行lore的效果
+      separator: "\\n"
+      prefix: '"'
+      postfix: '"'
