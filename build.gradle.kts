@@ -5,7 +5,23 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.7.20"
 }
 
+val api: String? by project
+val lib: String? by project
+
+task("versionCheck") {
+    if (api != null) {
+        val origin = project.version.toString()
+        project.version = "$origin-api"
+    } else if (lib != null) {
+        val origin = project.version.toString()
+        project.version = "$origin-lib"
+    }
+}
+
 taboolib {
+    if (project.version.toString().contains("-api")) {
+        options("skip-kotlin-relocate")
+    }
     description {
         contributors {
             name("Neige")
@@ -41,11 +57,15 @@ dependencies {
     compileOnly("ink.ptms:nms-all:1.0.0")
     compileOnly("ink.ptms.core:v11902:11902-minimize:mapped")
     compileOnly("ink.ptms.core:v11902:11902-minimize:universal")
-    compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
     compileOnly("net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT")
     compileOnly("org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT")
     compileOnly("io.lumine:Mythic-Dist:5.1.0")
+    if (project.version.toString().contains("-lib")) {
+        taboo(kotlin("stdlib"))
+    } else {
+        compileOnly(kotlin("stdlib"))
+    }
 }
 
 tasks.withType<JavaCompile> {

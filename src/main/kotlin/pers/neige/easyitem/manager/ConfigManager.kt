@@ -31,6 +31,7 @@ object ConfigManager {
     @Awake(LifeCycle.INIT)
     fun saveResource() {
         plugin.saveResourceNotWarn("Items${File.separator}ExampleItem.yml")
+        plugin.saveResourceNotWarn("Items${File.separator}RPGExample.yml")
         plugin.saveDefaultConfig()
         // 加载bstats
         val metrics = Metrics(17686, plugin.description.version, Platform.BUKKIT)

@@ -9,6 +9,8 @@ ExampleItem:
   name: §6一件皮革甲
   # 物品Lore
   lore:
+  - '简单节点测试: <easyTest>'
+  - '快速计算测试: <calcTest>'
   - '文本中小于号请添加反斜杠, 防止错误识别'
   - '形如: \<\<\<\>\>\>'
   - "换行符测试\n换行符测试"
@@ -222,3 +224,43 @@ RepeatTest1:
       separator: "\\n"
       prefix: '"'
       postfix: '"'
+RepeatTest2:
+  material: STONE
+  lore:
+    # 4行"&4&l<红宝石槽>"
+    - '<repeat>'
+  sections:
+    repeat:
+      type: repeat
+      content: '&4&l<红宝石槽>'
+      repeat: 4
+      # 像下面这样写分隔符、前缀和后缀
+      # 即可达到调用多行lore的效果
+      separator: "\\n"
+      prefix: '"'
+      postfix: '"'
+RepeatTest3:
+  material: STONE
+  lore:
+    # "§4§l<★>-§4§l<★>-§4§l<★>"
+    - '<repeat>'
+  sections:
+    repeat:
+      type: repeat
+      content: '§4§l<★>'
+      repeat: 3
+      separator: "-"
+RepeatTest4:
+  material: STONE
+  lore:
+    # 形似&4||||||||||&f||||||||||
+    - 'repeat节点: &4<repeat1>&f<repeat2>'
+  sections:
+    repeat1:
+      type: repeat
+      content: "|"
+      repeat: 10
+    repeat2:
+      type: repeat
+      content: "|"
+      repeat: 10

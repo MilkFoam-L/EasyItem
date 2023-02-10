@@ -1,0 +1,55 @@
+RPGSwordTemplate:
+  material: <材质>
+  name: <前缀>大剑
+  lore:
+  - §e----属性----
+  - <属性>
+  - §e----宝石----
+  - <宝石>
+  unbreakable: true
+  hideflags:
+  - HIDE_ATTRIBUTES
+  - HIDE_UNBREAKABLE
+  sections:
+    材质: IRON_SWORD
+    宝石:
+      type: repeat
+      content: §7可镶嵌 <宝石类型>
+      repeat: <宝石数量>
+      separator: "\\n"
+      prefix: '"'
+      postfix: '"'
+    宝石类型: §4§l红宝石
+    宝石数量: 4
+
+RPGSword1:
+  inherit: RPGSwordTemplate
+  sections:
+    前缀: §a§l霍格沃茨
+    属性:
+      type: join
+      list:
+      - '§f攻击力: 100'
+      - '§f暴击率: 10%'
+      - '§f暴击伤害: 100%'
+      separator: "\\n"
+      prefix: '"'
+      postfix: '"'
+    宝石类型: §b§l蓝宝石
+    宝石数量: 2
+
+RPGSword2:
+  inherit: RPGSwordTemplate
+  sections:
+    前缀: §b§l莱因哈特
+    属性:
+      type: join
+      list:
+      - '§f攻击力: 200'
+      - '§f暴击率: 20%'
+      - '§f暴击伤害: 200%'
+      separator: "\\n"
+      prefix: '"'
+      postfix: '"'
+    宝石类型: §a§l绿宝石
+    宝石数量: 3
