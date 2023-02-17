@@ -227,7 +227,7 @@ object ItemManager : ItemConfigManager() {
                 // 保存文件
                 config.save(file)
                 // 物品保存好了, 信息加进ItemManager里
-                addItem(ItemGenerator(ItemConfig(id, file)))
+                addItem(ItemGenerator(ItemConfig(id, file, config)))
                 if (cover) return 0
                 return 1
             }
