@@ -136,6 +136,10 @@ object ItemManager : ItemConfigManager() {
                 val configSection = config.createSection(id)
                 // 设置物品材质
                 configSection.set("material", itemStack.type.toString())
+                // 设置子ID/损伤值
+                if (itemStack.durability > 0) {
+                    configSection.set("damage", itemStack.durability)
+                }
                 // 如果物品有ItemMeta
                 if (itemStack.hasItemMeta()) {
                     // 获取ItemMeta
@@ -151,10 +155,6 @@ object ItemManager : ItemConfigManager() {
                             configSection.set("custommodeldata", itemMeta.customModelData)
                         }
                     } catch (error: NoSuchMethodError) {}
-                    // 设置子ID/损伤值
-                    if (itemStack.durability > 0) {
-                        configSection.set("damage", itemStack.durability)
-                    }
                     // 设置物品名
                     if (itemMeta?.hasDisplayName() == true) {
                         configSection.set("name", itemMeta.displayName)
