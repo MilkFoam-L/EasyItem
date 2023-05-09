@@ -18,14 +18,13 @@ import pers.neige.easyitem.manager.ItemManager
 import pers.neige.easyitem.utils.ItemUtils.coverWith
 import pers.neige.easyitem.utils.ItemUtils.toItemTag
 import pers.neige.easyitem.utils.SectionUtils.parseSection
+import pers.neige.easyitem.utils.LangUtils.sendLang
 import pers.neige.neigeitems.item.ItemConfig
 import pers.neige.neigeitems.utils.ConfigUtils.clone
 import pers.neige.neigeitems.utils.ConfigUtils.coverWith
 import pers.neige.neigeitems.utils.ConfigUtils.loadFromString
-import pers.neige.neigeitems.utils.ConfigUtils.loadGlobalSections
 import pers.neige.neigeitems.utils.ConfigUtils.saveToString
 import pers.neige.neigeitems.utils.ConfigUtils.toMap
-import pers.neige.neigeitems.utils.LangUtils.sendLang
 import taboolib.common.env.RuntimeDependencies
 import taboolib.common.env.RuntimeDependency
 import taboolib.module.nms.ItemTag
@@ -112,7 +111,7 @@ class ItemGenerator(config: ItemConfig) {
         id = itemConfig.id
         file = itemConfig.file
         originConfigSection = itemConfig.configSection ?: YamlConfiguration() as ConfigurationSection
-        configSection = loadGlobalSections(inherit((YamlConfiguration() as ConfigurationSection), originConfigSection))
+        configSection = inherit((YamlConfiguration() as ConfigurationSection), originConfigSection)
         configString = configSection.saveToString(id)
         sections = configSection.getConfigurationSection("sections")
         itemSection = this.configSection.clone().also {
