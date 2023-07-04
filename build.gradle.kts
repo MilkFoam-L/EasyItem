@@ -62,7 +62,7 @@ dependencies {
     compileOnly("net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT")
     compileOnly("org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT")
     compileOnly("io.lumine:Mythic-Dist:5.1.0")
-    compileOnly("pers.neige.neigeitems:NeigeItems:1.14.12")
+    compileOnly("pers.neige.neigeitems:NeigeItems:1.14.20")
     if (project.version.toString().contains("-lib")) {
         taboo(kotlin("stdlib"))
     } else {
