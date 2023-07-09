@@ -47,19 +47,19 @@ ExampleItem:
       max: 100
       fixed: 3
 
-GradientTest:
-  material: STONE
-  lore:
-    - <test1>
-    - <test2>
-  sections:
-    test1: <gradient::000000_FFFFFF_1_---------->
-    test2:
-      type: gradient
-      colorStart: 000000
-      colorEnd: FFFFFF
-      step: 1
-      text: ----------
+#GradientTest:
+#  material: STONE
+#  lore:
+#    - <test1>
+#    - <test2>
+#  sections:
+#    test1: <gradient::000000_FFFFFF_1_---------->
+#    test2:
+#      type: gradient
+#      colorStart: 000000
+#      colorEnd: FFFFFF
+#      step: 1
+#      text: ----------
 
 # 一个测试模板
 template1:

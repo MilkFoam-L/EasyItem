@@ -48,20 +48,15 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/public") }
-    maven { url = uri("https://mvn.lumine.io/repository/maven-public") }
     maven { url = uri("https://jitpack.io") }
     maven { url = uri("https://repo.tabooproject.org/storages/public/releases") }
     maven("https://r.irepo.space/maven/")
 }
 
 dependencies {
-    compileOnly("ink.ptms:nms-all:1.0.0")
-    compileOnly("ink.ptms.core:v11902:11902-minimize:mapped")
-    compileOnly("ink.ptms.core:v11902:11902-minimize:universal")
     compileOnly(fileTree("libs"))
     compileOnly("net.md-5:bungeecord-api:1.19-R0.1-SNAPSHOT")
-    compileOnly("org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT")
-    compileOnly("io.lumine:Mythic-Dist:5.1.0")
+    compileOnly("org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT")
     compileOnly("pers.neige.neigeitems:NeigeItems:1.14.20")
     if (project.version.toString().contains("-lib")) {
         taboo(kotlin("stdlib"))
