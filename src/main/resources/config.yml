@@ -75,4 +75,16 @@ ItemList:
   ItemFormat: §6{index}. §a{ID} §6- §f{name}
   Prev: 上一页
   Next: 下一页
+# 正常情况下yaml键可以使用.作为多级分隔符, 比如:
+# t1.t2: test
+# 等价于
+# t1:
+#   t2: test
+# 但这种情况会导致NBT里不能包含.
+# 因此EasyItem进行特殊操作, 允许你将.替换为其他字符
+# 比如默认配置中的"黐", 将会使:
+# t1黐t2: test
+# 等价于
+# t1:
+#   t2: test
 PathSeparator: 黐
