@@ -2,6 +2,7 @@ package pers.neige.easyitem.manager
 
 import org.bukkit.configuration.file.YamlConfiguration
 import pers.neige.easyitem.EasyItem.plugin
+import pers.neige.easyitem.manager.ConfigManager.pathSeparator
 import pers.neige.neigeitems.item.ItemConfig
 import pers.neige.neigeitems.utils.ConfigUtils.getAllFiles
 import java.io.File
@@ -44,9 +45,12 @@ open class ItemConfigManager {
      */
     private fun loadItemConfigs() {
         for (file: File in files) {
-            val config = YamlConfiguration.loadConfiguration(file)
-            config.getKeys(false).forEach { id ->
-                itemConfigs[id] = ItemConfig(id, file, config)
+            with (YamlConfiguration()) {
+                options().pathSeparator(pathSeparator)
+                load(file)
+                getKeys(false).forEach { id ->
+                    itemConfigs[id] = ItemConfig(id, file, this)
+                }
             }
         }
     }

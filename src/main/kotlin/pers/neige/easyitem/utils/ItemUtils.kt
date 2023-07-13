@@ -1,5 +1,6 @@
 package pers.neige.easyitem.utils
 
+import org.bukkit.configuration.ConfigurationSection
 import pers.neige.neigeitems.utils.StringUtils.split
 import taboolib.module.nms.ItemTag
 import taboolib.module.nms.ItemTagData
@@ -21,7 +22,18 @@ object ItemUtils {
     fun HashMap<*, *>.toItemTag(): ItemTag {
         val itemTag = ItemTag()
         for ((key, value) in this) {
-            itemTag[key as String] = value.toItemTagData()
+            itemTag[(key as String)] = value.toItemTagData()
+        }
+        return itemTag
+    }
+
+    @JvmStatic
+    fun ConfigurationSection.toItemTag(): ItemTag {
+        val itemTag = ItemTag()
+        this.getKeys(false).forEach { key ->
+            this.get(key)?.let { value ->
+                itemTag[key] = value.toItemTagData()
+            }
         }
         return itemTag
     }
@@ -41,6 +53,14 @@ object ItemUtils {
             this.startsWith("(Long) ") -> this.substring(7, this.length).toLongOrNull() ?: this
             this.startsWith("(Float) ") -> this.substring(8, this.length).toFloatOrNull() ?: this
             this.startsWith("(Double) ") -> this.substring(9, this.length).toDoubleOrNull() ?: this
+            this.startsWith("[") && this.endsWith("]") -> {
+                val list = this.substring(1, this.lastIndex).split(",").map { it.cast() }
+                when {
+                    list.all { it is Byte } -> ByteArray(list.size){ list[it] as Byte }
+                    list.all { it is Int } -> IntArray(list.size){ list[it] as Int }
+                    else -> this
+                }
+            }
             else -> this
         }
     }
@@ -131,6 +151,7 @@ object ItemUtils {
                 }
             }
             is HashMap<*, *> -> ItemTagData(this.toItemTag())
+            is ConfigurationSection -> ItemTagData(this.toItemTag())
             else -> ItemTagData("nm的你塞了个什么东西进来，我给你一拖鞋")
         }
     }

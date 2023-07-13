@@ -13,18 +13,18 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.LeatherArmorMeta
 import org.bukkit.inventory.meta.MapMeta
 import org.bukkit.inventory.meta.PotionMeta
+import pers.neige.easyitem.manager.ConfigManager
 import pers.neige.easyitem.manager.ConfigManager.config
 import pers.neige.easyitem.manager.ItemManager
+import pers.neige.easyitem.utils.ConfigUtils.loadFromString
 import pers.neige.easyitem.utils.ItemUtils.coverWith
 import pers.neige.easyitem.utils.ItemUtils.toItemTag
-import pers.neige.easyitem.utils.SectionUtils.parseSection
 import pers.neige.easyitem.utils.LangUtils.sendLang
+import pers.neige.easyitem.utils.SectionUtils.parseSection
 import pers.neige.neigeitems.item.ItemConfig
-import pers.neige.neigeitems.utils.ConfigUtils.clone
+import pers.neige.easyitem.utils.ConfigUtils.clone
 import pers.neige.neigeitems.utils.ConfigUtils.coverWith
-import pers.neige.neigeitems.utils.ConfigUtils.loadFromString
 import pers.neige.neigeitems.utils.ConfigUtils.saveToString
-import pers.neige.neigeitems.utils.ConfigUtils.toMap
 import taboolib.common.env.RuntimeDependencies
 import taboolib.common.env.RuntimeDependency
 import taboolib.module.nms.ItemTag
@@ -110,8 +110,8 @@ class ItemGenerator(config: ItemConfig) {
     init {
         id = itemConfig.id
         file = itemConfig.file
-        originConfigSection = itemConfig.configSection ?: YamlConfiguration() as ConfigurationSection
-        configSection = inherit((YamlConfiguration() as ConfigurationSection), originConfigSection)
+        originConfigSection = itemConfig.configSection ?: YamlConfiguration()
+        configSection = inherit(YamlConfiguration().also { it.options().pathSeparator(ConfigManager.pathSeparator) }, originConfigSection)
         configString = configSection.saveToString(id)
         sections = configSection.getConfigurationSection("sections")
         itemSection = this.configSection.clone().also {
@@ -225,7 +225,7 @@ class ItemGenerator(config: ItemConfig) {
         }
         nbt = when {
             configSection.contains("nbt") -> {
-                configSection.getConfigurationSection("nbt")?.toMap()?.toItemTag()
+                configSection.getConfigurationSection("nbt")?.toItemTag()
             }
             else -> null
         }

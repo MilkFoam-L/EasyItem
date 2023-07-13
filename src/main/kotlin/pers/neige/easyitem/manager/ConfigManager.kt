@@ -25,6 +25,8 @@ object ConfigManager {
      */
     val config get() = plugin.config
 
+    var pathSeparator: Char = config.getString("PathSeparator")!!.toCharArray().first()
+
     /**
      * 加载默认配置文件
      */
@@ -64,5 +66,6 @@ object ConfigManager {
     fun reload() {
         plugin.reloadConfig()
         loadConfig()
+        pathSeparator = config.getString("PathSeparator")!!.toCharArray().first()
     }
 }
