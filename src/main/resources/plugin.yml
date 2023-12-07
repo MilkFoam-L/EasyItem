@@ -1,0 +1,11 @@
+name: EasyItem
+main: pers.neige.easyitem.taboolib.platform.BukkitPlugin
+version: ${version}
+
+authors:
+  - 'Neige'
+
+softdepend:
+  - 'NeigeItems'
+
+api-version: 1.13

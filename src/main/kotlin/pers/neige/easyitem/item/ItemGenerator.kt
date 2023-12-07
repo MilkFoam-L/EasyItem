@@ -25,8 +25,6 @@ import pers.neige.neigeitems.item.ItemConfig
 import pers.neige.easyitem.utils.ConfigUtils.clone
 import pers.neige.neigeitems.utils.ConfigUtils.coverWith
 import pers.neige.neigeitems.utils.ConfigUtils.saveToString
-import taboolib.common.env.RuntimeDependencies
-import taboolib.common.env.RuntimeDependency
 import taboolib.module.nms.ItemTag
 import taboolib.module.nms.ItemTagData
 import taboolib.module.nms.ItemTagList
@@ -34,12 +32,6 @@ import taboolib.module.nms.getItemTag
 import java.io.File
 import java.util.*
 
-@RuntimeDependencies(
-    RuntimeDependency(
-        "!com.alibaba.fastjson2:fastjson2-kotlin:2.0.9",
-        test = "!com.alibaba.fastjson2.filter.Filter"
-    )
-)
 /**
  * 物品生成器
  *
@@ -181,7 +173,7 @@ class ItemGenerator(config: ItemConfig) {
         }
         illegalName = when {
             configSection.contains("illegalName") -> {
-                ItemTagData(configSection.getString("illegalName"))
+                ItemTagData(configSection.getString("illegalName")!!)
             }
             else -> null
         }
